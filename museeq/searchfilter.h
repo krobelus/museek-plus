@@ -56,12 +56,12 @@ private:
 
 	bool mEnabled;
 	QComboBox* mRegExp, * mSize, * mBitrate;
-	QCheckBox* mFreeSlot;
+	QCheckBox* mFreeSlot, * mInvertMatch;
 
 	QRegExp mFilterRegExp;
 	qint64 mFilterSize;
 	int mFilterBitrate;
-	bool mFilterFreeSlot, mFilterSizeExact, mFilterBitrateExact;
+	bool mFilterFreeSlot, mFilterSizeExact, mFilterBitrateExact, mFilterInvertMatch;
 };
 
 class MyLineEdit : public QLineEdit {

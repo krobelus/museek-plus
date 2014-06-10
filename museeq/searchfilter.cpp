@@ -58,6 +58,10 @@ SearchFilter::SearchFilter(QWidget *parent, const char *name)
 	box->addWidget(mFreeSlot);
 	connect(mFreeSlot, SIGNAL(toggled(bool)), SLOT(updateFilter()));
 
+                mInvertMatch = new QCheckBox(tr("Invert match"), this);
+                box->addWidget(mInvertMatch);
+                connect(mInvertMatch, SIGNAL(toggled(bool)), SLOT(updateFilter()));
+
 	updateFilter();
 }
 
@@ -86,7 +90,7 @@ void SearchFilter::refilter(SearchListView *list) {
  	while(*it) {
  	    SearchListItem* item = dynamic_cast<SearchListItem*>(*it);
  	    if (item)
-            (*it)->setHidden(!match(item));
+            (*it)->setHidden(mFilterInvertMatch ? match(item) : !match(item));
  		it++;
  	}
 }
@@ -173,6 +177,7 @@ void SearchFilter::updateFilter() {
 	}
 
 	mFilterFreeSlot = mFreeSlot->isChecked();
+                mFilterInvertMatch = mInvertMatch->isChecked();
 
 	emit filterChanged();
 }
